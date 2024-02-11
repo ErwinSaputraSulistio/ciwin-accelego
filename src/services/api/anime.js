@@ -9,30 +9,28 @@ const getOneQuoteAPI = async() => {
     if(response.data) { return response.data }
     else { throw new Error('No response from server') }
   }
-  catch(err) { throw err }
-}
-
-const getQuotesAPI = async() => {
-  try {
-    const response = await axios.get(`${animeApi}/quotes`)
-    if(response.data) { return response.data }
-    else { throw new Error('No response from server') }
+  catch(err) { 
+    if(err.response) { throw err.response.data.error }
+    else { throw err.message }
   }
-  catch(err) { throw err }
 }
 
 const getQuotesByConditionAPI = async(condition) => {
   try {
-    if(condition.category && condition.title && condition.page) {
-      const response = await axios.get(
-        `${animeApi}/quotes/${condition.category}?title=${condition.title}&page=${condition.page}`
-      )
+    if(condition.category && condition.search) {
+      const response = await axios.get(`${animeApi}/quotes/${condition.category}?${condition.category === 'anime' ? 'title' : 'name'}=${condition.search}`)
       if(response.data) { return response.data }
       else { throw new Error('No response from server') }
     }
-    else { throw new Error('All conditions such as category, title, and page must be fulfilled') }
+    else { throw new Error('All conditions such as category, search, and page must be fulfilled') }
   }
-  catch(err) { throw err }
+  catch(err) {
+    if(err.response) { 
+      if(err.response.data.error) { throw err.response.data.error }
+      else { throw err.response.data }
+    }
+    else { throw err.message }
+  }
 }
 
-export { getOneQuoteAPI, getQuotesAPI, getQuotesByConditionAPI }
+export { getOneQuoteAPI, getQuotesByConditionAPI }

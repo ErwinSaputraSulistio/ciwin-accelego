@@ -5,11 +5,13 @@ const GlobalContext = createContext()
 
 const GlobalContextProvider = ({ children }) => {
   const [user, setUser] = useState(null)
+  const [quotes, setQuotes] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
   return(
     <GlobalContext.Provider value={{ 
       user, setUser,
+      quotes, setQuotes,
       isLoading, setIsLoading
     }}>
       { isLoading && <Loader/> }

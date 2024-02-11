@@ -2,8 +2,8 @@ import styles from './styles'
 
 const Button = ({ 
   click = () => {}, 
-  customClass = '', 
-  mode = 'dark', 
+  customClass = '',
+  mode = 'dark',
   name = 'Button',
 }) => {
   return(

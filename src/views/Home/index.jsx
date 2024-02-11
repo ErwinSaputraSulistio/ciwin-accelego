@@ -1,20 +1,28 @@
-import useDataQuery from 'hooks/useDataQuery'
-import { getQuotesAPI } from 'services/api/anime'
-import Container from 'components/templates/Container'
+import useGlobalContext from 'hooks/useGlobalContext'
+import styles from './styles'
+import Navbar from 'components/organisms/Navbar'
 
 const Home = () => {
-  const animeQuotes = useDataQuery(getQuotesAPI)
+  const { quotes } = useGlobalContext()
 
   return(
-    <Container>
-      { 
-        animeQuotes.map((item, index) => {
-          return(
-            <div key={`quote-${ index }`}>{ item.quote }</div>
-          )
-        }) 
-      }
-    </Container>
+    <main className={ styles.home }>
+      <Navbar/>
+      <div className={ styles.container }>
+        <aside className={ styles.favorite }>
+          My Favorite
+        </aside>
+        <section className={ styles.quotes }>
+          {
+            quotes.map((item, index) => {
+              return(
+                <div key={`anime-quote-${ index }`}>{ item.quote }</div>
+              )
+            })
+          }
+        </section>
+      </div>
+    </main>
   )
 }
 

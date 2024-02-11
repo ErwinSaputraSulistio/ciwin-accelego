@@ -1,11 +1,10 @@
-import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { GlobalContext } from 'store/GlobalContext'
+import useGlobalContext from './useGlobalContext'
 import userApi from 'services/api/user'
 import showPopup from 'utils/showPopup'
 
 const useAuthentication = () => {
-  const { user, setUser, setIsLoading } = useContext(GlobalContext)
+  const { user, setUser, setIsLoading } = useGlobalContext()
   const navigate = useNavigate()
 
   const login = async(data) => {

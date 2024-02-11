@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styles from './styles'
 import NavbarHeader from 'components/molecules/NavbarHeader'
-import NavbarNavigation from 'components/molecules/NavbarNavigation'
+import NavbarSearch from 'components/molecules/NavbarSearch'
 import NavbarAuthentication from 'components/molecules/NavbarAuthentication'
 
 const Navbar = () => {
@@ -16,7 +16,7 @@ const Navbar = () => {
         isHamburgerClicked={ isHamburgerClicked } 
         setIsHamburgerClicked={ setIsHamburgerClicked }
       />
-      <NavbarNavigation/>
+      <NavbarSearch/>
       <NavbarAuthentication/>
     </nav>
   )
