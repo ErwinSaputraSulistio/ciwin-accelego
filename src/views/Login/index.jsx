@@ -1,22 +1,11 @@
-import useAuthentication from 'hooks/useAuthentication'
-import Button from 'components/atoms/Button'
+import Authentication from 'components/templates/Authentication'
+import Form from 'components/organisms/Form'
 
 const Login = () => {
-  const { login } = useAuthentication()
-
   return(
-    <Button
-      click={ 
-        () => { 
-          login({
-            email: 'eve.holt@reqres.in',
-            password: 'password'
-          }) 
-        } 
-      }
-      mode='dark'
-      name='Login'
-    />
+    <Authentication>
+      <Form action='Login'/>
+    </Authentication>
   )
 }
 

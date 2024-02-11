@@ -15,7 +15,7 @@ const useDataQuery = (apiCallback, condition = {}) => {
     getInitialData()
   }, [])
 
-  return { data }
+  return data
 }
 
 export default useDataQuery

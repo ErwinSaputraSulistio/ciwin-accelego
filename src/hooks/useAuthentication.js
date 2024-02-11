@@ -1,20 +1,27 @@
 import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { GlobalContext } from 'store/GlobalContext'
-import { loginApi } from 'services/api/user'
+import userApi from 'services/api/user'
+import showPopup from 'utils/showPopup'
 
 const useAuthentication = () => {
   const { user, setUser, setIsLoading } = useContext(GlobalContext)
+  const navigate = useNavigate()
 
   const login = async(data) => {
     try {
       setIsLoading(true)
-      const result = await loginApi(data)
+      const result = await userApi('login', data)
       if(result) { 
         setIsLoading(false)
-        setUser(data.email)
+        showPopup('success', `Welcome, ${ data.email }`)
+        .then(() => { setUser(data.email) })
       }
     }
-    catch(err) { console.log(err) }
+    catch(err) { 
+      setIsLoading(false)
+      showPopup('error', err)
+    }
   }
 
   const logout = () => {
@@ -27,8 +34,20 @@ const useAuthentication = () => {
     }, 1000)
   }
   
-  const register = (data) => {
-    
+  const register = async(data) => {
+    try {
+      setIsLoading(true)
+      const result = await userApi('register', data)
+      if(result) { 
+        setIsLoading(false)
+        showPopup('success', 'This email has been successfully registered')
+        .then(() => { navigate('/login') })
+      }
+    }
+    catch(err) {
+      setIsLoading(false)
+      showPopup('error', err)
+    }
   }
 
   return { login, logout, register, user }

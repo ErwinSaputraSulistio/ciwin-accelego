@@ -3,12 +3,12 @@ import { getQuotesAPI } from 'services/api/anime'
 import Container from 'components/templates/Container'
 
 const Home = () => {
-  const { data } = useDataQuery(getQuotesAPI)
+  const animeQuotes = useDataQuery(getQuotesAPI)
 
   return(
     <Container>
       { 
-        data.map((item, index) => {
+        animeQuotes.map((item, index) => {
           return(
             <div key={`quote-${ index }`}>{ item.quote }</div>
           )

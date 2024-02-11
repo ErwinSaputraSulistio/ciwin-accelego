@@ -1,19 +1,18 @@
 import axios from 'axios'
 
 // I'll place the URL here for now, and I'll move this to .env later
-const userApi = 'https://reqres.in/api'
+const userApiUrl = 'https://reqres.in/api'
 
-const loginApi = async(data) => {
+const userApi = async(action, data) => {
   try {
-    const response = await axios.post(`${userApi}/login`, data)
+    const response = await axios.post(`${ userApiUrl }/${ action }`, data)
     if(response.data) { return response.data }
     else { throw new Error('No response from server') }
   }
-  catch(err) { throw err }
+  catch(err) { 
+    if(err.response) { throw err.response.data.error }
+    else { throw err.message }
+  }
 }
 
-const registerApi = async() => {
-
-}
-
-export { loginApi, registerApi }
+export default userApi
