@@ -24,7 +24,7 @@ const useAuthentication = () => {
     setTimeout(() => {
       setUser(null)
       setIsLoading(false)
-    }, 500)
+    }, 1000)
   }
   
   const register = (data) => {

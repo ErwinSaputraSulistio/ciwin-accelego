@@ -13,8 +13,7 @@ module.exports = {
         "c-black": "#222227",
         "c-white": "#F8F8FF",
         "c-darkgrey": "#9F9F9F",
-        "c-lightgrey": "#D7D7D7",
-        "c-transparent-black": "rgba(0, 0, 0, 0.5)"
+        "c-lightgrey": "#D7D7D7"
       }
     },
   },

@@ -4,7 +4,7 @@ import Loader from 'components/templates/Loader'
 const GlobalContext = createContext()
 
 const GlobalContextProvider = ({ children }) => {
-  const [user, setUser] = useState('Ciwin')
+  const [user, setUser] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
   return(
