@@ -10,7 +10,10 @@ const getOneQuoteAPI = async() => {
     else { throw new Error('No response from server') }
   }
   catch(err) { 
-    if(err.response) { throw err.response.data.error }
+    if(err.response) { 
+      if(err.response.data.error) { throw err.response.data.error }
+      else { throw err.response.data }
+    }
     else { throw err.message }
   }
 }
@@ -18,7 +21,9 @@ const getOneQuoteAPI = async() => {
 const getQuotesByConditionAPI = async(condition) => {
   try {
     if(condition.category && condition.search) {
-      const response = await axios.get(`${animeApi}/quotes/${condition.category}?${condition.category === 'anime' ? 'title' : 'name'}=${condition.search}`)
+      const response = await axios.get(
+        `${animeApi}/quotes/${condition.category}?${condition.category === 'anime' ? 'title' : 'name'}=${condition.search}${condition.page ? `&page=${condition.page}` : ''}`
+      )
       if(response.data) { return response.data }
       else { throw new Error('No response from server') }
     }

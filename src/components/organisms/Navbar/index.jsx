@@ -16,8 +16,10 @@ const Navbar = () => {
         isHamburgerClicked={ isHamburgerClicked } 
         setIsHamburgerClicked={ setIsHamburgerClicked }
       />
-      <NavbarSearch/>
-      <NavbarAuthentication/>
+      <div className={ styles.navbarOptions }>
+        <NavbarSearch setIsHamburgerClicked={ setIsHamburgerClicked }/>
+        <NavbarAuthentication/>
+      </div>
     </nav>
   )
 }

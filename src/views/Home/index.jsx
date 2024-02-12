@@ -1,28 +1,20 @@
-import useGlobalContext from 'hooks/useGlobalContext'
+import { HomeContextProvider } from './store/HomeContext'
 import styles from './styles'
 import Navbar from 'components/organisms/Navbar'
+import Favorites from 'components/organisms/Favorites'
+import Quotes from 'components/organisms/Quotes'
 
 const Home = () => {
-  const { quotes } = useGlobalContext()
-
   return(
-    <main className={ styles.home }>
-      <Navbar/>
-      <div className={ styles.container }>
-        <aside className={ styles.favorite }>
-          My Favorite
-        </aside>
-        <section className={ styles.quotes }>
-          {
-            quotes.map((item, index) => {
-              return(
-                <div key={`anime-quote-${ index }`}>{ item.quote }</div>
-              )
-            })
-          }
-        </section>
-      </div>
-    </main>
+    <HomeContextProvider>
+      <main className={ styles.home }>
+        <Navbar/>
+        <div className={ styles.container }>
+          <Favorites/>
+          <Quotes/>
+        </div>
+      </main>
+    </HomeContextProvider>
   )
 }
 

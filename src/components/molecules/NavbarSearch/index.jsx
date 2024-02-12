@@ -1,10 +1,13 @@
 import useNavbarSearch from './hooks/useNavbarSearch'
 import styles from './styles'
-import SearchLogo from 'assets/SearchLogo.svg'
 import Dropdown from 'components/atoms/Dropdown'
+import Search from 'components/atoms/Search'
 
-const NavbarSearch = () => {
-  const { category, setCategory, searchRef, searchQuotes } = useNavbarSearch()
+const NavbarSearch = ({ setIsHamburgerClicked }) => {
+  const { 
+    category, setCategory, 
+    searchRef, searchQuotes 
+  } = useNavbarSearch({ setIsHamburgerClicked })
 
   return(
     <form className={ styles.navbarSearch } onSubmit={ searchQuotes }>
@@ -13,22 +16,10 @@ const NavbarSearch = () => {
         setSelected={ setCategory } 
         options={ ['anime', 'character'] }
       />
-      <div className={ styles.navbarSearchGroup }>
-        <input 
-          className={ styles.navbarSearchInput } 
-          placeholder='Search anime titles or characters ...'
-          ref={ searchRef }
-          required 
-          type='text'
-        />
-        <button className={ styles.navbarSearchButton }>
-          <img 
-            alt='search-logo' 
-            className={ styles.navbarSearchButtonLogo } 
-            src={ SearchLogo }
-          />
-        </button>
-      </div>
+      <Search
+        placeholder='Search anime titles or characters ...'
+        ref={ searchRef }
+      />
     </form>
   )
 }

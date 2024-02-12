@@ -1,0 +1,57 @@
+@keyframes slide {
+  0% { left: 0; }
+  100% { left: -300%; }
+}
+
+.carouselContainer {
+  height: 60%;
+  overflow: hidden;
+  position: relative;
+  margin-top: -2.5rem;
+  width: 100%;
+}
+.carouselTrack {
+  align-items: center;
+  animation: slide 15s linear infinite;
+  display: flex;
+  left: 0;
+  height: 100%;
+  justify-content: center;
+  position: absolute;
+  width: auto;
+}
+.carouselTrack:hover {
+  animation-play-state: paused;
+}
+.carouselCard {
+  background: #D7D7D7;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90%;
+  margin: 0 1rem;
+  padding: 1rem;
+  transition: 0.25s;
+  width: 15rem;
+}
+.carouselCard:hover {
+  background: #F8F8FF;
+  transform: scale(1.1);
+}
+.carouselCardQuote {
+  font-size: 0.875rem;
+  overflow: hidden;
+  text-align: justify;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+}
+.carouselCardDescription {
+  font-weight: bold;
+  font-size: 0.75rem;
+  font-style: italic;
+  text-align: right;
+  width: 100%;
+}

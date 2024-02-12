@@ -1,30 +1,21 @@
 import { useRef, useState } from 'react'
-import useGlobalContext from 'hooks/useGlobalContext'
-import { getQuotesByConditionAPI } from 'services/api/anime'
-import showPopup from 'utils/showPopup'
+import { useHomeContext } from 'views/Home/hooks/useHomeContext'
 
 const useNavbarSearch = () => {
   const [category, setCategory] = useState(null)
-  const { setIsLoading, setQuotes } = useGlobalContext()
+  const { condition, setCondition, setIsFirstRender } = useHomeContext()
   const searchRef = useRef()
   
   const searchQuotes = async(e) => {
     e.preventDefault()
-    setIsLoading(true)
-    try {  
-      const result = await getQuotesByConditionAPI({
-        category, 
+    if(condition.search !== searchRef.current.value) { 
+      const newCondition = {
+        category,
         search: searchRef.current.value
-      })
-      if(result) {
-        setQuotes(result)
-        setIsLoading(false)
-        showPopup('success', searchRef.current.value)
       }
-    }
-    catch(err) { 
-      setIsLoading(false) 
-      showPopup('error', err)
+      setIsFirstRender(false)
+      setCondition(newCondition)
+      localStorage.setItem('condition', JSON.stringify(newCondition))
     }
   }
 

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import useGlobalContext from './useGlobalContext'
+import { useGlobalContext } from './useGlobalContext'
 import userApi from 'services/api/user'
 import showPopup from 'utils/showPopup'
 
@@ -13,13 +13,16 @@ const useAuthentication = () => {
       const result = await userApi('login', data)
       if(result) { 
         setIsLoading(false)
-        showPopup('success', `Welcome, ${ data.email }`)
-        .then(() => { setUser(data.email) })
+        showPopup('Login Success', `Welcome, ${ data.email }`, 'success')
+        .then(() => { 
+          setUser(data.email)
+          localStorage.setItem('user', JSON.stringify(data.email))
+        })
       }
     }
     catch(err) { 
       setIsLoading(false)
-      showPopup('error', err)
+      showPopup('Login Error', err, 'error')
     }
   }
 
@@ -30,6 +33,8 @@ const useAuthentication = () => {
     setTimeout(() => {
       setUser(null)
       setIsLoading(false)
+      localStorage.removeItem('user')
+      localStorage.removeItem('favorites')
     }, 1000)
   }
   
@@ -39,13 +44,13 @@ const useAuthentication = () => {
       const result = await userApi('register', data)
       if(result) { 
         setIsLoading(false)
-        showPopup('success', 'This email has been successfully registered')
+        showPopup('Register Success', 'This email has been successfully registered', 'success')
         .then(() => { navigate('/login') })
       }
     }
     catch(err) {
       setIsLoading(false)
-      showPopup('error', err)
+      showPopup('Register Error', err, 'error')
     }
   }
 

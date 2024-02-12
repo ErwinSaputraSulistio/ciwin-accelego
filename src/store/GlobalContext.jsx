@@ -1,17 +1,18 @@
-import { createContext, useState } from 'react'
+import { createContext } from 'react'
+import { useGlobalContextSetup } from 'hooks/useGlobalContext'
 import Loader from 'components/templates/Loader'
 
 const GlobalContext = createContext()
 
 const GlobalContextProvider = ({ children }) => {
-  const [user, setUser] = useState(null)
-  const [quotes, setQuotes] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
+  const { 
+    user, setUser, 
+    isLoading, setIsLoading 
+  } = useGlobalContextSetup()
 
   return(
     <GlobalContext.Provider value={{ 
       user, setUser,
-      quotes, setQuotes,
       isLoading, setIsLoading
     }}>
       { isLoading && <Loader/> }

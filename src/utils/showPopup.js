@@ -1,10 +1,11 @@
 import Swal from 'sweetalert2'
 
-const showPopup = (condition, text) => {
+const showPopup = (title, text, icon, settings = {}) => {
   return Swal.fire({
-    title: condition,
-    text: text,
-    icon: condition
+    title,
+    text,
+    icon,
+    ...settings
   })
 }
 
